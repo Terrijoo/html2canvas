@@ -164,7 +164,9 @@ var CanvasRenderer = /** @class */ (function () {
         var fontVariant = styles.fontVariant
             .filter(function (variant) { return variant === 'normal' || variant === 'small-caps'; })
             .join('');
-        var fontFamily = styles.fontFamily.join(', ');
+        var fontFamily = styles.fontFamily.map(function (fontName) {
+            return fontName.indexOf(' ') === -1 ? fontName : "\"" + fontName + "\"";
+        }).join(', ');
         var fontSize = parser_1.isDimensionToken(styles.fontSize)
             ? "" + styles.fontSize.number + styles.fontSize.unit
             : styles.fontSize.number + "px";
